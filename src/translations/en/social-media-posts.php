@@ -21,5 +21,5 @@
  * @since     1.0.0
  */
 return [
-    'Social media posts plugin loaded' => 'Social media posts plugin loaded',
+    'Social media posts plugin loaded' => 'Craft social wall plugin loaded',
 ];

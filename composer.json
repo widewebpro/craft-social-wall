@@ -1,6 +1,6 @@
 {
     "name": "wideweb/social-media-posts",
-    "description": "Social media posts",
+    "description": "Craft Social Wall",
     "type": "craft-plugin",
     "version": "1.0.0",
     "keywords": [
@@ -30,7 +30,7 @@
         }
     },
     "extra": {
-        "name": "Social media posts",
+        "name": "Craft social wall",
         "handle": "social-media-posts",
         "developer": "WideWeb",
         "developerUrl": "WideWeb.pro",
