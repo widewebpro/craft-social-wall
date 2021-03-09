@@ -1,0 +1,49 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Social media posts plugin for Craft CMS 3.x
+ *
+ * Social media posts Settings.twig
+ *
+ * @author    WideWeb
+ * @copyright Copyright (c) 2020 WideWeb
+ * @link      WideWeb.pro
+ * @package   SocialMediaPosts
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("wideweb\\socialmediaposts\\assetbundles\\socialmediaposts\\SocialMediaPostsAsset") %}
+
+{{ forms.textField({
+    label: 'App Id For Facebook',
+    instructions: 'Enter App Id from Facebook',
+    id: 'appIdFb',
+    name: 'appIdFb',
+    value: settings['appIdFb']})
+}}
+
+{{ forms.textField({
+    label: 'App Id For Instagram',
+    instructions: 'Enter App Id from Instagram',
+    id: 'appIdInst',
+    name: 'appIdInst',
+    value: settings['appIdInst']})
+}}
+
+{{ forms.textField({
+    label: 'App Id Secret For Instagram',
+    instructions: 'Enter App Id Secret from Instagram',
+    id: 'appIdInstSecret',
+    name: 'appIdInstSecret',
+    value: settings['appIdInstSecret']})
+}}
+{{ forms.textField({
+    label: 'App Id Secret For Facebook',
+    instructions: 'Enter App Id Secret from Facebook',
+    id: 'appIdFbSecret',
+    name: 'appIdFbSecret',
+    value: settings['appIdFbSecret']})
+}}

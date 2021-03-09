@@ -1,0 +1,21 @@
+<script type='text/javascript'>
+    FB.getLoginStatus(function(response) {
+        if (response.status === 'connected'){
+            data = response.authResponse;
+            data['{{ craft.app.config.general.csrfTokenName|e('js') }}'] = '{{ craft.app.request.csrfToken|e('js') }}';
+            console.log(data);
+            const url = `/actions/social-media-posts/default?data=${JSON.stringify(data)}`;
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+
+        }
+    });
+
+</script>

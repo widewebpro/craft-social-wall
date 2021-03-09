@@ -1,0 +1,94 @@
+{% set docTitle = 'Socials' %}
+{% set title = 'Socials' %}
+{% extends '_layouts/cp' %}
+{% block main %}
+    {% if not craft.socialMediaPosts.checkLoginFb(currentUser.id) %}
+    <script src="https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v9.0&appId={{ craft.app.getPlugins().getPlugin('social-media-posts').getSettings().appIdFb }}&autoLogAppEvents=1">
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : {{craft.app.getPlugins().getPlugin('social-media-posts').getSettings().appIdFb}},
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v9.0'
+            });
+            FB.AppEvents.logPageView();
+        };
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        FB.Event.subscribe('auth.login', function(response) {
+            window.location.href='/actions/social-media-posts/login-fb/register-user-fb';
+        });
+    </script>
+    <div
+        style="
+            background-color: #fff;
+            padding: 12px;
+            border-radius: 7px;
+        "
+    >
+        <h2>FaceBook -
+            <fb:login-button
+                scope="user_posts"
+                onlogin="window.location='/actions/social-media-posts/login-fb/register-user-fb'">
+            </fb:login-button>
+        </h2>
+        {% else %}
+            <h2>FaceBook - <span class="connected">Connected</span> <a href="/actions/social-media-posts/login-fb/logout-fb">Disconnect</a> </h2>
+        {% endif %}
+        {% if not craft.socialMediaPosts.checkLoginInst(currentUser.id) %}
+            <h2> Instagram -
+                <a class="login"
+                   href="https://api.instagram.com/oauth/authorize?client_id={{ craft.app.getPlugins().getPlugin('social-media-posts').getSettings().appIdInst }}&redirect_uri={{ currentSite.baseUrl() }}actions/social-media-posts/login-inst/login-inst&scope=user_profile,user_media&response_type=code">
+                    Login
+                </a>
+            </h2>
+        {% else %}
+            <h2>Instagram - <span class="connected">Connected</span><a href="/actions/social-media-posts/login-inst/logout-inst">Disconnect</a></h2>
+        {% endif %}
+        <style>
+            .login {
+                display: inline-block;
+                border: 2px solid #f37028;
+                color: #f37028;
+                box-shadow: 0 5px 9px rgba(243,112,41,.25);
+                border-radius: 28px;
+                font-family: Raleway,sans-serif;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 24px;
+                text-align: center;
+                min-width: 154px;
+                transition: all 0.3s ease;
+                text-decoration: none !important;
+            }
+            .login:hover {
+                background: #f37028;
+                color: #fff;
+                text-decoration: none !important;
+            }
+            .connected {
+                display: inline-block;
+                border: 2px solid #00bf61;
+                color: #000;
+                box-shadow: 4px 4px 6px -2px rgba(0,0,0,.15);
+                border-radius: 28px;
+                font-family: Raleway,sans-serif;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 24px;
+                text-align: center;
+                min-width: 154px;
+            }
+            h2:last-of-type {
+                margin-bottom: 0;
+            }
+        </style>
+    </div>
+{% endblock %}
