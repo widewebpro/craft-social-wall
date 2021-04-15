@@ -104,14 +104,14 @@ class GetPostsController extends Controller
             $result = @file_get_contents($url, false, $context);
             $result = @json_decode($result);
             if (is_object($result) and isset($result->data)){
-                $data = $result->data;
+//                $data = $result->data;
 //                $newData = [];
 //                foreach ($data as $key =>  $item){
 //                    if($item->privacy->value == 'EVERYONE'){
 //                        array_push($newData, $item);
 //                    }
 //                }
-                $data['facebook'] = $data;
+                $data['facebook'] = $result->data;
             }
         }
         return \GuzzleHttp\json_encode($data);
