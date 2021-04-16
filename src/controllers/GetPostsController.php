@@ -61,6 +61,7 @@ class GetPostsController extends Controller
 
     public function actionGetPostsFromSocials($userId, $limit=100)
     {
+        Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
         $dataInst = (new Query())->select(['inst_id', 'access_token'])
             ->from('{{%socialmediaposts_instagram}}')
             ->where("user_id = $userId")->one();
